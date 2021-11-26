@@ -1,15 +1,17 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { store } from './app/store';
-import App from './App';
+import React from "react";
+import { shallow } from "enzyme";
+import App from "./App";
+import Games from "./features/games/Games";
 
-test('renders learn react link', () => {
-  const { getByText } = render(
-    <Provider store={store}>
-      <App />
-    </Provider>
-  );
+describe("App Component", () => {
+  let container: any;
+  beforeEach(() => (container = shallow(<App />)));
 
-  expect(getByText(/learn/i)).toBeInTheDocument();
+  it("should component be rendering ", () => {
+    expect(container.find("div").length).toEqual(1);
+  });
+
+  it("should render the Games component", () => {
+    expect(container.containsMatchingElement(<Games />)).toEqual(true);
+  });
 });
